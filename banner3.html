@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="banner">
+		<div id="moving-panel">
+			<div id="images-panel">
+				<img class="image-1" data-text="active-1" data-perspective="left" src="1.svg" alt="">
+				<img class="image-2" data-text="active-2" data-perspective="right" src="2.svg" alt="">
+				<img class="image-3" data-text="active-3" data-perspective="left" src="3.svg" alt="">
+				<img class="image-4" data-text="active-4" data-perspective="left" src="4.svg" alt="">
+				<img class="image-5" data-text="active-5" data-perspective="right" src="5.svg" alt="">
+			</div>
+			<div id="text-panel">
+				<div class="title-1"><h2><em>Esri</em> Partnership</h2><p>Esri is an industry leader in GIS and we are proud partners with Esri.</p></div>
+				<div class="title-2"><h2>Let's <em>build cities</em> together</h2><p>As City Planners, we are passionate about solving your Planning challenges through the right use of GIS technology.</p></div>
+				<div class="title-3"><h2>GIS Simplified for <br><em>planners</em> by <em>planners</em></h2>
+						<p>ViewPro is a workforce of City Planners driven by the need for efficient functioning of cities, an objective we achieve by empowering Cities and Local Government with use GIS technology.</p></div>
+				<div class="title-4"><h2><em>One-stop</em> decision making</h2><p>ViewPro tools enable easy cross-exchange of data among all functions of local.</p></div>
+				<div class="title-5"><h2>Let's keep it <em>simple</em></h2><p>Technology is meant to simplify our tasks and not to overwhelm us.</p></div>
+			</div>
+		</div>
+		
+	</div>
+	<script>
+		var images = document.querySelectorAll("#images-panel img")
+		var banner = document.querySelector('#banner');
+		banner.addEventListener('mousemove', function(e){
+			var xm = window.outerWidth/2.2-e.clientX-200+"px";
+			var ym = window.outerHeight/3-e.clientY+"px";
+			document.querySelector('#moving-panel').style.transform = "translateX("+xm+") translateY("+ym+")"
+		}, false);
+		images.forEach(function(e){
+			e.addEventListener('mouseenter',function(){
+			document.querySelector('#images-panel').classList.add(e.dataset.perspective);
+			document.querySelector('#text-panel').classList.add(e.dataset.text);
+			}, false);
+			e.addEventListener('mouseleave',function(){
+			document.querySelector('#images-panel').classList.remove(e.dataset.perspective);
+			document.querySelector('#text-panel').classList.remove(e.dataset.text);
+			}, false);
+		})
+	</script>
+</body>
+</html>
