@@ -26,8 +26,11 @@
 			height:100%;
 			transition:transform 0.3s ease-out;
 		}
-		.rotate-pane.active{
-			transform:perspective(2000px) rotateY(10deg);
+		.rotate-pane.rotateleft{
+			transform:perspective(2000px) rotateY(10deg) translateZ(20px);
+		}
+		.rotate-pane.rotateright{
+			transform:perspective(2000px) rotateY(-10deg) translateZ(20px);
 		}
 		.moving-pane{
 			position:absolute;
@@ -45,10 +48,6 @@
 		}
 		
 
-		.moving-pane.active .obj img{
-			/*transform:perspective(500px) scale(1.1);*/
-
-		}
 		.moving-pane.active .obj .hover-text{
 			transform: rotateY(0deg) translateZ(50px);
 		}
@@ -59,6 +58,7 @@
 			position:absolute;
 			left:10px;
 			top:10px;
+			padding-right:200px;
 			transition:transform 0.3s ease-in-out;
 		}
 		.object-2{
@@ -181,23 +181,23 @@
 	<div id="banner">
 		<div class="rotate-pane">
 			<div class="moving-pane">
-				<div class="obj object-1" data-text='text-1'>
+				<div class="obj object-1" data-text='text-1' data-rotate="rotateleft">
 					<img src="1.svg"/>
 					
 				</div>
-				<div class="obj object-2" data-text='text-2'>
+				<div class="obj object-2" data-text='text-2'  data-rotate="rotateright">
 					<img src="2.svg"/>
 					
 				</div>
-				<div class="obj object-3" data-text='text-3'>
+				<div class="obj object-3" data-text='text-3'  data-rotate="rotateleft">
 					<img src="3.svg"/>
 					
 				</div>
-				<div class="obj object-4" data-text='text-4'>
+				<div class="obj object-4" data-text='text-4'  data-rotate="rotateleft">
 					<img src="4.svg"/>
 					
 				</div>
-				<div class="obj object-5" data-text='text-5'>
+				<div class="obj object-5" data-text='text-5'  data-rotate="rotateright">
 					<img src="5.svg"/>
 					
 				</div>
@@ -252,12 +252,12 @@
 		objects.forEach(function(e){
 			e.addEventListener('mouseenter',function(){
 			document.querySelector('.moving-pane').classList.add('active');
-			document.querySelector('.rotate-pane').classList.add('active');
+			document.querySelector('.rotate-pane').classList.add(e.dataset.rotate);
 			document.querySelector('.text-pane').classList.add(e.dataset.text);
 			}, false);
 			e.addEventListener('mouseleave',function(){
 			document.querySelector('.moving-pane').classList.remove('active');
-			document.querySelector('.rotate-pane').classList.remove('active');
+			document.querySelector('.rotate-pane').classList.remove(e.dataset.rotate);
 			document.querySelector('.text-pane').classList.remove(e.dataset.text);
 			}, false);
 		})
